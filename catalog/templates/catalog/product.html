@@ -1,0 +1,43 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{%load custom_tags%}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Информация о первом товаре</h1>
+</div>
+
+<div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td class="w-25">Наименование</td>
+                            <td>{{object_list.0.title}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Описание</td>
+                            <td>{{object_list.0.description}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Изображение</td>
+
+                            <td><img src="{{ object_list.0.image|mediapath }}" /></td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Категория</td>
+                            <td>{{object_list.0.category}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Цена</td>
+                            <td>{{object_list.0.price}} RUB</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Дата и время создания</td>
+                            <td>{{object_list.0.created_at}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Дата и время изменения</td>
+                            <td>{{object_list.0.changed_at}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+{% endblock %}
