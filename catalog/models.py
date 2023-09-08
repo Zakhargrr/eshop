@@ -1,23 +1,6 @@
 from django.db import models
 
 
-class Product(models.Model):
-    title = models.CharField(max_length=30, verbose_name='наименование')
-    description = models.TextField(verbose_name='описание')
-    image = models.ImageField(upload_to='images/', verbose_name='изображение', null=True, blank=True)
-    category = models.CharField(max_length=50, verbose_name='категория')
-    price = models.IntegerField(verbose_name='цена за покупку')
-    created_at = models.DateTimeField(verbose_name='дата создания')
-    changed_at = models.DateTimeField(verbose_name='дата последнего изменения')
-
-    def __str__(self):
-        return f'{self.title} - {self.description}. Цена: {self.price}'
-
-    class Meta:
-        verbose_name = 'продукт'
-        verbose_name_plural = 'продукты'
-
-
 class Category(models.Model):
     title = models.CharField(max_length=30, verbose_name='наименование')
     description = models.TextField(verbose_name='описание')
@@ -28,3 +11,20 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
+
+
+class Product(models.Model):
+    title = models.CharField(max_length=30, verbose_name='наименование')
+    description = models.TextField(verbose_name='описание')
+    image = models.ImageField(upload_to='images/', verbose_name='изображение', null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
+    price = models.PositiveIntegerField(verbose_name='цена за покупку')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
+    changed_at = models.DateTimeField(auto_now=True, verbose_name='дата последнего изменения')
+
+    def __str__(self):
+        return f'{self.title} - {self.description}. Цена: {self.price}'
+
+    class Meta:
+        verbose_name = 'продукт'
+        verbose_name_plural = 'продукты'
