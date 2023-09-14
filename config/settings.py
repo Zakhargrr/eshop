@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'catalog.apps.CatalogConfig',
+    'blogs.apps.BlogsConfig',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
+
 )
 
 # Default primary key field type
@@ -132,3 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+

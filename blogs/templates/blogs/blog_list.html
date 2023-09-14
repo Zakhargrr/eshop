@@ -1,0 +1,38 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{%load custom_tags%}
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Блоги</h1>
+</div>
+<div class="col-12 mb-5">
+    <a class="ms-5 p-2 btn btn-outline-primary" href="{% url 'blogs:create_blog' %}">Добавить запись</a>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{object.title}}</h4>
+                </div>
+                <img src="{% mediapath object.image %}" />
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{object.views_count}} просмотров</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        {{object.description|split}}
+                    </ul>
+                    <a href="{% url 'blogs:blog_info' object.pk %}" type="button" class="btn btn-sm btn-block btn-outline-primary">Подробнее</a>
+                    <a href="{% url 'blogs:edit_blog' object.pk %}" type="button" class="btn btn-sm btn-block btn-outline-primary">Изменить</a>
+                    <a href="{% url 'blogs:delete_blog' object.pk %}" type="button" class="btn btn-sm btn-block btn-outline-primary">Удалить</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
+

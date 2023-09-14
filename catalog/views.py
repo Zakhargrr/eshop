@@ -1,32 +1,24 @@
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, DetailView
 
-from catalog.models import Product
+from catalog.models import Product, Contact
 
 
 # Create your views here.
-def home(request):
-    products_list = Product.objects.all()
-    context = {
-        'object_list': products_list
-    }
-    return render(request, 'catalog/home.html', context)
+
+class ProductListView(ListView):
+    model = Product
 
 
-def contacts(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
-        print("\nКонтактные данные пользователя:")
-        print(f"Имя: {name}")
-        print(f"Телефон: {phone}")
-        print(f"Сообщение: {message}\n")
-    return render(request, 'catalog/contacts.html')
+class ContactCreateView(CreateView):
+    model = Contact
+    fields = ('name', 'phone_number', 'message',)
+    success_url = reverse_lazy('catalog:contacts')
 
 
-def product(request, pk):
-    product_item = Product.objects.get(pk=pk)
-    context = {
-        'object': product_item,
-    }
-    return render(request, 'catalog/product.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+
+
+
+
