@@ -35,6 +35,7 @@ class BlogUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('blogs:blog_info', args=[self.kwargs.get('pk')])
 
+
 class BlogListView(ListView):
     model = Blog
 

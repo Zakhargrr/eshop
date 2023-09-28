@@ -7,7 +7,7 @@
     <h1 class="display-4">Skystore</h1>
     <p class="lead">Блоги</p>
 </div>
-
+<a class="p-2 btn btn-outline-primary mb-5 ml-1 ms-5" href="{% url 'catalog:create_product' %}">Добавить товар</a>
 <div class="container">
     <div class="row text-center">
         {% for object in object_list %}
@@ -16,13 +16,21 @@
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{object.title}}</h4>
                 </div>
-                <img src="{% mediapath object.image %}" />
+                <img src="{% mediapath object.image %}"/>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">{{object.price}} RUB</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         {{object.description|split}}
                     </ul>
-                    <a href="{% url 'catalog:product' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</a>
+                    {% for version in object.version_set.all %}
+                        {% if version.is_current == True %}
+                            {{version}}
+                    <br>
+                    <br>
+                        {% endif %}
+                    {% endfor %}
+                    <a href="{% url 'catalog:product' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
                 </div>
             </div>
         </div>

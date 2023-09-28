@@ -6,38 +6,41 @@
 </div>
 
 <div class="card mb-4 box-shadow">
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <tr>
-                            <td class="w-25">Наименование</td>
-                            <td>{{object.title}}</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Описание</td>
-                            <td>{{object.description}}</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Изображение</td>
+    <div class="card-body">
+        <table class="table table-striped">
+            <tr>
+                <td class="w-25">Наименование</td>
+                <td>{{object.title}}</td>
+            </tr>
+            <tr>
+                <td class="w-25">Описание</td>
+                <td>{{object.description}}</td>
+            </tr>
+            <tr>
+                <td class="w-25">Изображение</td>
 
-                            <td><img src="{{ object.image|mediapath }}" /></td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Категория</td>
-                            <td>{{object.category}}</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Цена</td>
-                            <td>{{object.price}} RUB</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Дата и время создания</td>
-                            <td>{{object.created_at}}</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Дата и время изменения</td>
-                            <td>{{object.changed_at}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                <td><img src="{{ object.image|mediapath }}"/></td>
+            </tr>
+            <tr>
+                <td class="w-25">Категория</td>
+                <td>{{object.category}}</td>
+            </tr>
+            <tr>
+                <td class="w-25">Цена</td>
+                <td>{{object.price}} RUB</td>
+            </tr>
+            <tr>
+                <td class="w-25">Дата и время создания</td>
+                <td>{{object.created_at}}</td>
+            </tr>
+            <tr>
+                <td class="w-25">Дата и время изменения</td>
+                <td>{{object.changed_at}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<a class="p-2 btn btn-outline-primary ms-5" href="{% url 'catalog:edit_product' object.pk %}">Изменить</a>
+<a class="p-2 btn btn-outline-primary ms-2" href="{% url 'catalog:delete_product' object.pk %}">Удалить</a>
+
 {% endblock %}
