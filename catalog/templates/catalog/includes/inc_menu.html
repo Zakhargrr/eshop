@@ -1,8 +1,40 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">Skystore</h5>
-    <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:home' %}">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contacts' %}">Контакты</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'blogs:list' %}">Блоги</a>
-    </nav>
+    <div class="col-7">
+
+        <nav class="ms-2">
+            <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:home' %}">Каталог</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contacts' %}">Контакты</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'blogs:list' %}">Блоги</a>
+
+
+        </nav>
+
+
+    </div>
+    <div class="col-5 ms-5">
+        {% if user.first_name %}
+        <strong>{{user.first_name}} {{user.last_name}}</strong>
+        {% else %}
+        <strong>Имя не указано</strong>
+        {% endif %}
+
+        {% if user.is_verified == True %}
+        <strong> - верифицирован</strong>
+        {% else %}
+        <strong> - не верифицирован</strong>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">Профиль</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Выйти</a>
+        {% else %}
+
+        <a class="p-2 btn btn-outline-primary " href="{% url 'users:register' %}">Регистрация</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+
+
+        {% endif %}
+
+
+    </div>
 </div>
